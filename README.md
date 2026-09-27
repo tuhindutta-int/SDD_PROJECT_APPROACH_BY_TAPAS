@@ -35,6 +35,44 @@ Release
 
 No feature implementation begins without an approved specification.
 
+## Specification Standard
+
+One feature, one specification. A specification is a feature contract that defines what is built and what correctness means — not how it is built.
+
+Three-stage specification governance:
+
+1. **Pre-writing gate:** `.agent/workflows/spec-prewriting-gate.md` — run before drafting a spec.
+2. **Quality standard:** `.agent/rules/int-sdd-specification-standard.md` — the authoritative governing rules.
+3. **Review workflow:** `.agent/workflows/spec-review.md` — run before Gate 1.
+
+Template: `.ai-context/specs/_template.spec.md`.
+
+No spec may self-approve. Gate 1 requires a named human non-author review.
+
+## Gate 1 Peer Review
+
+Gate 1 is the mandatory human peer review of the specification before implementation begins. It is pre-code design and intent validation — not post-code bug finding.
+
+- **Gate 1 rule:** `.agent/rules/int-sdd-gate-1.md` — governing principles, reviewer requirements, and review dimensions.
+- **Gate 1 workflow:** `.agent/workflows/gate-1-review.md` — the reviewer-facing checklist and structured report format.
+
+Gate 1 evaluates: ambiguity, testability, scope, API contract, constitution compliance, overlap, and dependencies.
+Gate 1 has two outcomes only: `Approved` or `Changes Requested`.
+AI may assist; AI may not approve. The reviewer must be a named human who is not the spec author.
+
+## Architecture and Repository Standards
+
+Every plan is checked against the constitution and architecture before task generation.
+
+- **Architecture rule:** `.agent/rules/int-sdd-architecture.md` — governing principles for plans, ADRs, architecture.md, and repository practices.
+- **Architecture check:** `.agent/workflows/architecture-check.md` — run after plan is drafted, before task generation.
+- **ADR assessment:** `.agent/workflows/adr-check.md` — determines whether a significant decision requires an ADR.
+- **Repository check:** `.agent/workflows/repository-check.md` — verifies branch naming, scope, PR traceability, and commit compliance.
+- **ADR template:** `.ai-context/decisions/_template.adr.md` — canonical ADR structure.
+- **ADR store:** `.ai-context/decisions/` — project-global ADR files (`ADR-NNNN-<slug>.md`).
+
+Key rules: one feature branch per spec, slug-traceable branches, squash-merge to main, no AI attribution in commits, task-ID traceability in commits.
+
 ## Non-Negotiable Implementation Gates
 
 Normal implementation is blocked unless the approved chain and compliance check are satisfied:

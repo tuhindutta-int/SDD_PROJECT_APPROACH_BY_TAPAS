@@ -19,6 +19,14 @@ This constitution records project-wide engineering constraints. The specificatio
 
 SDD uses a structured, version-controlled specification—not source code—as the primary engineering artefact. Code, tests, and maintained documentation are downstream outputs of the approved artefact chain. No implementation task may bypass that chain or collapse its artefacts into one document.
 
+### Specification standard (Line 6)
+
+One feature equals one specification. The specification is the feature contract — it defines what is built and what correctness means, not how it is built. Before authoring a spec, run `.agent/workflows/spec-prewriting-gate.md`. The complete specification quality rules are governed by `.agent/rules/int-sdd-specification-standard.md`. Before Gate 1, run `.agent/workflows/spec-review.md`. No spec may self-approve; Gate 1 requires a named human non-author review.
+
+### Gate 1 peer review (Line 7)
+
+Gate 1 is the mandatory human peer review of the specification — and plan where applicable — before implementation begins. It is pre-code design and intent validation, not post-code bug finding. The governing rule is `.agent/rules/int-sdd-gate-1.md`. The review workflow is `.agent/workflows/gate-1-review.md`. Gate 1 must explicitly evaluate: ambiguity, testability, scope, API contract, constitution compliance, existing-spec overlap, and dependencies. Gate 1 has exactly two outcomes: `Approved` or `Changes Requested`. AI may assist but may not approve. The reviewer must be a named human who is not the spec author.
+
 ### Responsibility boundaries
 
 | Artefact | Sole responsibility | Must not contain |
@@ -73,6 +81,21 @@ Codex is an executor and reasoning tool within SDD, not the authority for busine
 ## Non-Negotiable Implementation Gates
 
 The six hard delivery constraints are governed by `.agent/rules/int-sdd-non-negotiables.md`: approved-spec-only implementation, no spec-less prompting, test-first with confirmed RED, no secrets or PII, scoped context, and human accountability for every merged line. All normal implementation work must complete `.agent/workflows/pre-implementation-compliance.md`; failure, ambiguity, or conflict blocks implementation.
+
+Specification authoring is additionally governed by the three-stage specification governance layer:
+1. Pre-writing gate: `.agent/workflows/spec-prewriting-gate.md` — run before drafting.
+2. Specification standard: `.agent/rules/int-sdd-specification-standard.md` — the governing quality rules.
+3. Review workflow: `.agent/workflows/spec-review.md` — run before Gate 1.
+
+Gate 1 peer review is governed by:
+4. Gate 1 rule: `.agent/rules/int-sdd-gate-1.md` — the governing Gate 1 principles.
+5. Gate 1 workflow: `.agent/workflows/gate-1-review.md` — the reviewer-facing checklist and report format.
+
+Architecture and repository governance are governed by (Line 8):
+6. Architecture and repository rule: `.agent/rules/int-sdd-architecture.md` — mandatory plan→constitution check, integration/data-model/deferred-item requirements, ADR significance rule, architecture.md currency, one-feature-branch-per-spec, branch naming, squash-merge, AI-attribution prohibition.
+7. Architecture check workflow: `.agent/workflows/architecture-check.md` — run after plan is drafted, before task generation.
+8. ADR assessment workflow: `.agent/workflows/adr-check.md` — determines whether a significant decision requires an ADR.
+9. Repository check workflow: `.agent/workflows/repository-check.md` — verifies branch, PR, commit, and merge compliance.
 
 ## Lifecycle Governance
 
