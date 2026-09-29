@@ -31,18 +31,22 @@ Review workflow: `.agent/workflows/spec-review.md`.
 
 ## 2. Feature Identity — Slug Standard
 
-A spec ID is a unique, human-readable kebab-case `<feature-slug>`.
+**The authoritative naming and identifier rule is `.agent/rules/int-sdd-naming.md`.**
 
-Rules:
+A spec ID is a unique, human-readable kebab-case `<feature-slug>` that serves as
+the canonical root identity for the feature across its entire delivery lifecycle.
 
-- Kebab-case.
-- Human-readable, 3–5 words.
-- Specific enough to remain unique across the project lifetime.
-- Feature-oriented, not a vague generic identifier.
-- Never use: `feature-42`, `misc-change`, `new-feature`, `fix-stuff`.
-- Do not silently reuse or change a slug once downstream artefacts exist.
+Key rules (see `int-sdd-naming.md` §2 for complete requirements):
 
-The slug is the traceability key across all artefacts:
+- Kebab-case, 3–5 words, human-readable, specific, verb-free.
+- Never a vague placeholder: `feature-42`, `misc-change`, `new-feature`, `fix-stuff`,
+  `changes`, `final`, `wip`.
+- Must be registered in `.ai-context/slug-registry.md` at assignment time.
+- Must not be reused after retirement (see `int-sdd-naming.md` §7).
+- Must not be changed once downstream artefacts exist without following the
+  controlled rename process (see `int-sdd-naming.md` §6).
+
+The slug propagates across all artefacts:
 
 ```
 .ai-context/specs/<feature-slug>.spec.md
@@ -55,6 +59,8 @@ feature/<feature-slug>
 <feature-slug>.UT01, .UT02, .UTNN
 <feature-slug>.T01, .T02, .TNN
 ```
+
+Validate using `.agent/workflows/naming-identifier-check.md` before Gate 1.
 
 ---
 

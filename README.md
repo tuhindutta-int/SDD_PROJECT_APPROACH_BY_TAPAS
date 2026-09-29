@@ -87,18 +87,47 @@ The six mandatory controls are defined in `.agent/rules/int-sdd-non-negotiables.
 
 The governing lifecycle, state transitions, gates, hotfix path, and production feedback loop are documented in `.ai-context/lifecycle.md`. Use `.agent/workflows/sdd-lifecycle-check.md` to validate an action against the current lifecycle state before proceeding.
 
-## Feature Traceability Convention
+## Naming and Identifier Governance (Line 9)
 
-Each future feature uses a unique kebab-case slug, for example `2fa-otp-login`.
+The feature slug is the canonical root identity for a feature — not a cosmetic filename.
+It is assigned at spec creation, remains stable for the feature's lifetime, and must
+never be reused after retirement.
 
-The slug links these future artefacts:
+- **Naming rule:** `.agent/rules/int-sdd-naming.md` — slug format, immutability, archival, prompt-by-identity, ID hierarchy.
+- **Naming check workflow:** `.agent/workflows/naming-identifier-check.md` — validates slug, IDs, cross-references, and collision.
+- **Slug registry:** `.ai-context/slug-registry.md` — authoritative record of all slugs (active, retired, archived).
 
-- `.ai-context/specs/<slug>.spec.md`
-- `.ai-context/plans/<slug>.plan.md`
-- `.ai-context/tasks/<slug>.tasks.md`
-- `.ai-context/test_cases/<slug>.test_cases.md`
-- `feature/<slug>`
+### Traceability chain
 
-Identifiers use the same slug: `<slug>.AC1`, `<slug>.API01`, `<slug>.UT01`, and `<slug>.T01`.
+```
+BRD-NNN
+    ↓
+<feature-slug>          ← slug assigned at spec creation
+    │
+    ├── .ai-context/specs/<slug>.spec.md
+    │       └── <slug>.AC1, .API01, .UT01
+    │
+    ├── .ai-context/plans/<slug>.plan.md
+    ├── .ai-context/tasks/<slug>.tasks.md       → <slug>.T01, .T02 …
+    ├── .ai-context/test_cases/<slug>.test_cases.md
+    │
+    ├── feature/<slug>           (branch)
+    ├── [<slug>] description     (PR)
+    └── ADR-NNNN                 (project-global; not slug-scoped)
+```
+
+### Stable ID hierarchy
+
+| ID type | Format | Scoped to |
+| ------- | ------ | --------- |
+| Acceptance criteria | `<slug>.AC1` … | Feature |
+| API contract entries | `<slug>.API01` … | Feature |
+| Unit test cases | `<slug>.UT01` … | Feature |
+| Tasks | `<slug>.T01` … | Feature |
+| Business requirements | `BRD-NNN` | Project |
+| Architectural decisions | `ADR-NNNN` | Project-global |
+
+IDs are stable identities, not positional labels. Reordering artefact items
+does not shift IDs. Retired IDs are never reassigned.
 
 No example feature artefacts are created during bootstrap.

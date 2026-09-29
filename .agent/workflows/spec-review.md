@@ -28,7 +28,16 @@ If any **[BLOCKING]** item fails, the spec is **NOT READY**.
 - [ ] **[BLOCKING]** One feature only — not a bundle of independent features,
       not a project-wide spec, not a vague improvement.
 - [ ] **[BLOCKING]** Unique, specific, human-readable kebab-case `<feature-slug>`.
-      Not a generic ID (`feature-42`, `misc-change`, `new-feature`).
+      Not a generic ID (`feature-42`, `misc-change`, `new-feature`, `changes`, `final`, `wip`).
+- [ ] **[BLOCKING]** Slug is registered in `.ai-context/slug-registry.md` as `Active`.
+- [ ] **[BLOCKING]** Slug is not present in the Retired / Archived / Renamed
+      section of `.ai-context/slug-registry.md`.
+- [ ] **[BLOCKING]** Spec filename matches the slug exactly:
+      `.ai-context/specs/<feature-slug>.spec.md`.
+- [ ] **[BLOCKING]** The `## Spec ID` field in the spec contains the slug verbatim.
+- [ ] Run `.agent/workflows/naming-identifier-check.md` Parts 1–5 and confirm
+      NAMING CHECK PASSED for slug validity, format, uniqueness, and filename
+      before declaring READY FOR GATE 1.
 - [ ] Status is set to a valid lifecycle state from `.ai-context/lifecycle.md`.
 
 ### BRD Linkage

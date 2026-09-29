@@ -18,6 +18,26 @@ Answer each question explicitly before proceeding.
 
 ---
 
+### Q0 — Feature Slug Assignment (FIRST STEP)
+
+> Has a valid, unique feature slug been assigned for this feature?
+
+This is the first action — before any spec content is drafted.
+
+- Propose a slug following `.agent/rules/int-sdd-naming.md` §2:
+  - Kebab-case, 3–5 words, human-readable, specific, verb-free.
+  - Not a prohibited pattern (`feature-42`, `new-feature`, `changes`, `final`, `wip`, etc.).
+- Confirm the slug is not in `.ai-context/slug-registry.md` (active or retired).
+- Run Part 2–3 of `.agent/workflows/naming-identifier-check.md` to validate.
+- Register the slug in `.ai-context/slug-registry.md` before proceeding.
+
+If slug collision exists: **STOP. Assign a different slug.**
+If slug format is invalid: **STOP. Fix the slug before proceeding.**
+
+Record the confirmed slug: `<feature-slug>`
+
+---
+
 ### Q1 — One-paragraph feature description
 
 > Can the feature be described in one unambiguous paragraph that a zero-context

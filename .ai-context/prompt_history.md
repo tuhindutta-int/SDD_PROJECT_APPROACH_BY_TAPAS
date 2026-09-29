@@ -2,6 +2,39 @@
 
 This is an append-only audit log of user prompts and material execution events.
 
+## 2026-09-29 — INT SDD Line 9 Naming and Identifier Governance
+
+- **Artefact/task ID:** SDD Bootstrap — Line 9 Naming and Identifier Governance
+- **Objective:** Perform a full repository audit and establish INT SDD Line 9 as an authoritative, enforceable naming-and-identifier governance layer. No application functionality implemented. No architecture invented.
+- **Phase 1 — Inspect:** Full audit of all `.agent/rules/`, `.agent/workflows/`, all templates, `constitution.md`, `status.md`, `prompt_history.md`, and all artefact chain conventions. Confirmed Lines 1–8 are present and internally consistent.
+- **Phase 2 — Lines 1–8 reconstruction:** Verified against actual repository files. All Lines 1–8 confirmed present. Slug-related provisions existed in `int-sdd-specification-standard.md` §2, `int-sdd-architecture.md` §12–13, `constitution.md`, and `repository-check.md` §1 — but with scattered, partial coverage and no single authoritative source.
+- **Phase 3 — Gaps identified:**
+  - No authoritative naming/identifier rule (Line 9-specific)
+  - No slug uniqueness/collision rules beyond casual "unique" mentions
+  - No slug immutability or controlled-rename process
+  - No slug archival/retirement formal rules
+  - No ID immutability rules (AC/API/UT/T drift prevention)
+  - No ID validity and cross-reference validation rules
+  - No prompt-by-identity formal principle
+  - No dedicated naming/identifier validation workflow
+  - No test-case template existed anywhere in the repository
+  - No slug registry (central record for collision enforcement)
+  - Identity namespaces (feature-slug, BRD-NNN, ADR-NNNN) not formally distinguished
+- **Files created:**
+  - `.agent/rules/int-sdd-naming.md` — 14-section authoritative naming and identifier rule: slug as canonical root identity, format requirements, assignment timing, complete propagation chain, uniqueness/collision rules with slug registry, immutability, controlled rename process, retirement/archival, stable sub-identifier hierarchy (AC/API/UT/T), ID immutability (content vs identity change), three identity namespaces, cross-reference validity rules, prompt-by-identity governance, automated-checks-vs-human-approval distinction, Line 1–8 integration table.
+  - `.agent/workflows/naming-identifier-check.md` — 13-part validation workflow covering all 22 required checks: slug existence/timing, format, uniqueness/collision (including registry search), immutability, artefact filename consistency, branch naming, PR traceability, status board, AC/API/UT/T sub-ID validity, cross-reference validity, ADR identity, retired-slug reuse, prompt-by-identity readiness. Structured finding format with 15 area codes. Failure scenario table mapping all 10 Blueprint scenarios to specific check parts.
+  - `.ai-context/slug-registry.md` — Single authoritative slug record with Active and Retired/Archived/Renamed tables, status definitions, and registration instructions. The minimum required mechanism for reliable collision enforcement.
+  - `.ai-context/test_cases/_template.test_cases.md` — Missing test-case template with Feature Slug header, TC-ID format (`<slug>.TC01`), AC/UT mapping columns, RED/GREEN tracking, failure path coverage table, and identity rules section.
+- **Files updated:**
+  - `.agent/workflows/spec-prewriting-gate.md` — Added Q0 slug assignment step as the mandatory first action before any spec content is drafted; includes slug registry confirmation and naming-check workflow reference.
+  - `.agent/workflows/spec-review.md` — Strengthened Scope and Identity section with slug registry requirement, filename slug match, Spec ID header match, and naming-identifier-check workflow integration.
+  - `.ai-context/constitution.md` — Feature traceability section expanded with slug-as-identity framing and prompt-by-identity principle; Line 9 governance cross-references (rules 10–12) added.
+  - `README.md` — Feature Traceability Convention section replaced with comprehensive Naming and Identifier Governance section including traceability chain diagram and stable ID hierarchy table.
+  - `.ai-context/status.md` — Line 9 activity recorded.
+- **Validation:** Audited all Lines 1–9 for contradictions. All failure scenarios from Blueprint §27 validated against the workflow. No conflicts introduced. No fake architecture, fake ADRs, fake slugs, or application code created.
+- **Unresolved issues:** Business requirements, project stack, architecture, reviewer assignments remain TBD. First real slug will be assigned when a validated BRD entry exists.
+- **Decisions/deviations:** No application functionality implemented. No example feature created. Slug registry starts empty — correct for a bootstrap governance workspace.
+
 ## 2026-09-27 — INT SDD Line 8 Architecture and Repository Standards
 
 - **Artefact/task ID:** SDD Bootstrap — Line 8 Architecture and Repository Governance

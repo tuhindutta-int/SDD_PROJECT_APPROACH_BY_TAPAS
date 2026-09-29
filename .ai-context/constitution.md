@@ -60,7 +60,12 @@ If implementation conflicts with a spec, do not automatically trust the code. If
 
 ### Feature traceability and identifiers
 
-Each future feature has one unique kebab-case slug and a flat, linked artefact set:
+Each feature has exactly one unique kebab-case slug assigned at spec creation
+and a flat, linked artefact set. The slug is the canonical root identity — not
+a cosmetic filename. The authoritative naming and identifier rule is
+`.agent/rules/int-sdd-naming.md`. The slug registry is `.ai-context/slug-registry.md`.
+
+Artefact chain:
 
 - `.ai-context/specs/<feature-slug>.spec.md`
 - `.ai-context/plans/<feature-slug>.plan.md`
@@ -68,7 +73,15 @@ Each future feature has one unique kebab-case slug and a flat, linked artefact s
 - `.ai-context/test_cases/<feature-slug>.test_cases.md`
 - `feature/<feature-slug>`
 
-Use stable IDs: `<feature-slug>`, `<feature-slug>.AC1`, `<feature-slug>.API01`, `<feature-slug>.UT01`, and `<feature-slug>.T01`. ADR identifiers are project-global: `ADR-0001`, `ADR-0002`, and so on. These identifiers enable traceability through specs, plans, testing, implementation, review, Git, status, and release records.
+Use stable IDs: `<feature-slug>`, `<feature-slug>.AC1`, `<feature-slug>.API01`,
+`<feature-slug>.UT01`, and `<feature-slug>.T01`. ADR identifiers are project-global:
+`ADR-0001`, `ADR-0002`, and so on. BRD identifiers use `BRD-NNN`.
+These identifiers enable traceability through specs, plans, testing, implementation,
+review, Git, status, and release records.
+
+Prompt-by-identity preference: when a stable identifier exists, use it
+(e.g., `Implement <slug>.T03. Satisfy <slug>.AC3.`) rather than paraphrasing
+the artefact in prose.
 
 ### Version-control requirement
 
@@ -96,6 +109,11 @@ Architecture and repository governance are governed by (Line 8):
 7. Architecture check workflow: `.agent/workflows/architecture-check.md` — run after plan is drafted, before task generation.
 8. ADR assessment workflow: `.agent/workflows/adr-check.md` — determines whether a significant decision requires an ADR.
 9. Repository check workflow: `.agent/workflows/repository-check.md` — verifies branch, PR, commit, and merge compliance.
+
+Naming and identifier governance are governed by (Line 9):
+10. Naming rule: `.agent/rules/int-sdd-naming.md` — feature slug as canonical root identity, slug lifecycle, sub-identifier hierarchy, immutability, archival, prompt-by-identity.
+11. Naming/identifier check workflow: `.agent/workflows/naming-identifier-check.md` — validates slug format, uniqueness, filename consistency, ID validity, cross-references, and retired-slug protection.
+12. Slug registry: `.ai-context/slug-registry.md` — single authoritative record of all slugs (active, retired, archived, renamed).
 
 ## Lifecycle Governance
 

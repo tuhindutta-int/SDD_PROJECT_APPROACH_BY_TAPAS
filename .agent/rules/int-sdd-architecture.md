@@ -315,6 +315,9 @@ The default classification is non-trivial.
 **ONE FEATURE SPEC = ONE FEATURE BRANCH**
 
 The branch must trace directly to the same feature slug used across all artefacts.
+The authoritative slug format and lifecycle rules are defined in
+`.agent/rules/int-sdd-naming.md`. Slug validation uses
+`.agent/workflows/naming-identifier-check.md`.
 
 Traceability chain for a feature `<feature-slug>`:
 
@@ -333,7 +336,8 @@ This preserves a bounded, auditable scope between spec ↔ branch ↔ PR ↔ tas
 
 ## 13. Branch Naming Convention
 
-Use slug-traceable branch names:
+Use slug-traceable branch names. Feature slug format is governed by
+`.agent/rules/int-sdd-naming.md` §2.
 
 | Purpose | Convention | Example |
 | ------- | ---------- | ------- |
