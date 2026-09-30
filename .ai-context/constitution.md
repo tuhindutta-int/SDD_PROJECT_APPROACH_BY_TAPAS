@@ -115,6 +115,12 @@ Naming and identifier governance are governed by (Line 9):
 11. Naming/identifier check workflow: `.agent/workflows/naming-identifier-check.md` — validates slug format, uniqueness, filename consistency, ID validity, cross-references, and retired-slug protection.
 12. Slug registry: `.ai-context/slug-registry.md` — single authoritative record of all slugs (active, retired, archived, renamed).
 
+Development discipline is governed by (Line 10):
+13. Development rule: `.agent/rules/int-sdd-development.md` — one task one prompt, task readiness, generate→review→commit, changeset boundary, significantly-wrong generation stop rule, failure source classification, upstream correction path, context discipline, prompt-by-identity, test-first compatibility, commit governance, model-to-task matching, human accountability, anti-patterns.
+14. Task-by-task development workflow: `.agent/workflows/task-by-task-development.md` — 12-step operationalized implementation loop with preconditions, readiness check, scoped context loading, prompt construction, generation, diff inspection, review, outcome classification, commit, and status update.
+15. Development discipline check: `.agent/workflows/development-discipline-check.md` — validates task readiness, changeset scope, review completeness, commit compliance, status accuracy, and failure source classification.
+16. Code review workflow: `.agent/workflows/code-review.md` — task-scoped pre-commit review with AC/API/test/security/architecture/scope verification; produces task review record.
+
 ## Lifecycle Governance
 
 This constitution is project-level law and is not recreated per feature. The controlled delivery state model, including lifecycle states, gates, hotfixes, release, and feedback, is defined in `.ai-context/lifecycle.md`. A feature cannot silently override this constitution; an exception or contradiction requires an explicit governance decision.

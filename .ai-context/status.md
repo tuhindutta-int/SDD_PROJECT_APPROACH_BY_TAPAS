@@ -31,6 +31,8 @@ No active specifications.
 
 ## Recent Activity
 
+- 2026-09-30 — INT SDD Line 10 Development Discipline established: int-sdd-development.md rule (16 sections), task-by-task-development.md workflow (12-step loop), development-discipline-check.md validation workflow (6 parts, 18 checks), code-review.md strengthened (task-scoped, from 27 lines to comprehensive), tasks template updated (state definitions, test-first prerequisites table, prompt template), pre-implementation-compliance.md and int-sdd-non-negotiables.md updated with Line 10 cross-references, constitution.md (Line 10 governance items 13–16 added), README.md (Line 10 section). No feature work created.
+
 - 2026-09-29 — INT SDD Line 9 Naming and Identifier Governance established: int-sdd-naming.md rule (14 sections), naming-identifier-check.md workflow (13-part, 22 validations), slug-registry.md (collision/retirement enforcement), test_cases/_template.test_cases.md (missing template created), spec-prewriting-gate.md (Q0 slug assignment step added), spec-review.md (slug registry and naming check requirements added), constitution.md and README.md updated with Line 9 cross-references. No feature work created.
 
 - 2026-09-27 — INT SDD Line 8 Architecture and Repository Standards established: int-sdd-architecture.md rule (21 sections), architecture-check.md workflow (8-part), adr-check.md workflow (6-step ADR assessment + ADR template), repository-check.md workflow (8-part), ADR template, strengthened generate-plan.md and plan template, architecture.md governance header, constitution/README cross-references added. No feature work created.

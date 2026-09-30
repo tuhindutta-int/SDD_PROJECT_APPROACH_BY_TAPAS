@@ -2,7 +2,16 @@
 
 ## Purpose
 
-Hard gate for every normal application-code change. Execute this check before creating or modifying implementation code. If any required answer is missing, conflicting, or unverified, stop; do not implement.
+Hard gate for every normal application-code change. Execute this check before
+creating or modifying implementation code. If any required answer is missing,
+conflicting, or unverified, stop; do not implement.
+
+This check is the precondition gate for Step 1 of
+`.agent/workflows/task-by-task-development.md`.
+
+Governing rule: `.agent/rules/int-sdd-development.md`
+Development execution: `.agent/workflows/task-by-task-development.md`
+Discipline check: `.agent/workflows/development-discipline-check.md`
 
 ## Required Identification
 

@@ -131,3 +131,59 @@ IDs are stable identities, not positional labels. Reordering artefact items
 does not shift IDs. Retired IDs are never reassigned.
 
 No example feature artefacts are created during bootstrap.
+
+## Development Discipline (Line 10)
+
+**One task. One prompt. Generate → Review → Commit.**
+
+Implementation proceeds only against an approved task, one task at a time.
+Agents must not implement multiple tasks in one prompt, generate an aggregate
+diff, or commit before review.
+
+- **Development rule:** `.agent/rules/int-sdd-development.md` — canonical Line 10 authority: task contract, readiness, generate→review→commit, changeset boundary, significantly-wrong stop rule, failure source classification, context discipline, prompt-by-identity, test-first compatibility, commit governance, anti-patterns.
+- **Execution workflow:** `.agent/workflows/task-by-task-development.md` — 12-step task-by-task loop with preconditions, readiness check, prompt construction, generation, diff inspection, review, commit, and status update.
+- **Discipline check:** `.agent/workflows/development-discipline-check.md` — validates task readiness, changeset scope, review completeness, commit compliance, status accuracy, and generation failure classification.
+- **Code review:** `.agent/workflows/code-review.md` — task-scoped pre-commit review producing a review record before commit.
+
+### Development cycle (per task)
+
+```
+PRECONDITIONS: approved spec + Gate 1 + approved plan + tasks + test-first RED
+    ↓
+SELECT <slug>.TNN
+    ↓
+VERIFY task readiness (development-discipline-check.md Part 1)
+    ↓
+LOAD scoped context only
+    ↓
+PROMPT: Implement <slug>.TNN. Verify against <slug>.ACN.
+    ↓
+GENERATE change
+    ↓
+INSPECT diff (development-discipline-check.md Part 2)
+    ↓
+REVIEW (code-review.md)  ← MUST happen before commit
+    ↓
+COMMIT — Implements <slug>.TNN
+    ↓
+UPDATE status
+    ↓
+NEXT task
+```
+
+### Significantly wrong generation — stop rule
+
+If generation fundamentally misunderstands the requirement:
+
+```
+STOP re-prompting
+    ↓
+Classify: Prompt / Task / Plan / Spec / ADR / Context / Implementation defect
+    ↓
+Fix the authoritative source
+    ↓
+Regenerate from corrected source
+```
+
+Do not patch code to compensate for an ambiguous specification.
+

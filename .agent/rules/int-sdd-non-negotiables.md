@@ -50,10 +50,24 @@ Merge requires human Gate 2 evidence that approved-task traceability, AC verific
 
 ## Scope, Ambiguity, and Consistency Gates
 
-- Execute one bounded task at a time. If it is too broad, stop and report: **Task scope is too broad for a bounded SDD execution increment.**
-- Do not introduce undeclared features, refactors, business rules, APIs, data stores, architecture changes, dependencies, or behaviours.
-- For ambiguity, report **AMBIGUITY**, **SOURCE**, **IMPACT**, and **REQUIRED DECISION**. Do not guess or re-prompt around the same gap.
-- Before implementation, compare constitution, spec, plan, task, relevant architecture, and ADRs. If they conflict, identify the owning artefact and stop until it is updated through the proper process.
+- Execute one bounded task at a time. If it is too broad, stop and report:
+  **Task scope is too broad for a bounded SDD execution increment.**
+- Implementation is task-by-task, one prompt per task. Do not prompt for multiple
+  tasks simultaneously, implement multiple tasks in one generation, or present an
+  aggregate diff. See `.agent/rules/int-sdd-development.md` §2 for the full rule.
+- The standard implementation loop is generate → review → commit, in that order.
+  Do not commit unreviewed generated code.
+- Do not introduce undeclared features, refactors, business rules, APIs, data stores,
+  architecture changes, dependencies, or behaviours.
+- For ambiguity, report **AMBIGUITY**, **SOURCE**, **IMPACT**, and **REQUIRED DECISION**.
+  Do not guess or re-prompt around the same gap. When generation persistently
+  misunderstands a requirement, classify the failure source and correct the authoritative
+  artefact (task, plan, spec, or ADR) rather than continuing to re-prompt.
+  See `.agent/rules/int-sdd-development.md` §7 for the stop rule and failure source
+  classification, and `.agent/workflows/development-discipline-check.md` Part 6.
+- Before implementation, compare constitution, spec, plan, task, relevant architecture,
+  and ADRs. If they conflict, identify the owning artefact and stop until it is
+  updated through the proper process.
 
 ## Required Checks
 

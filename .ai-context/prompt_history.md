@@ -2,6 +2,52 @@
 
 This is an append-only audit log of user prompts and material execution events.
 
+## 2026-09-30 — INT SDD Line 10 Development Discipline
+
+- **Artefact/task ID:** SDD Bootstrap — Line 10 Development Discipline
+- **Objective:** Perform a full repository audit and establish INT SDD Line 10 as an authoritative, enforceable development discipline governance layer. Core rule: one task, one prompt. Generate → review → commit. No application functionality implemented. No architecture invented.
+- **Phase 1 — Inspect:** Full audit of `.agent/rules/`, `.agent/workflows/`, all templates, `constitution.md`, `lifecycle.md`, `status.md`, `prompt_history.md`, and all artefact chain conventions. Lines 1–9 confirmed present.
+- **Phase 2 — Lines 1–9 verification:** Confirmed present. Line 10-relevant provisions existed but were scattered and insufficient:
+  - `pre-implementation-compliance.md`: had task ID, scoped context, RED evidence, one-task reference — but no generate→review→commit structure
+  - `int-sdd-non-negotiables.md`: had "one bounded task at a time" and "do not re-prompt" — but no failure source classification or upstream correction path
+  - `code-review.md`: 27-line thin workflow; no task-scoped structure, no "significantly wrong" classification, no escalation path
+  - `lifecycle.md`: "one task, scoped context" in the In Development row — but one line
+  - Tasks template: basic states and one-task execution note — but no readiness fields, prompt template, or test-first prerequisites table
+- **Phase 3 — Gaps identified:**
+  - No authoritative `int-sdd-development.md` rule file (Line 10 had no canonical home)
+  - No `task-by-task-development.md` operationalized workflow
+  - No `development-discipline-check.md` validation workflow
+  - `code-review.md` was thin and not task-scoped
+  - No definition of "significantly wrong" generation and stop rule
+  - No upstream escalation path (prompt → task → plan → spec → ADR)
+  - No failure source classification (A–G taxonomy)
+  - No bounded corrective prompting principle
+  - No changeset boundary definition with explicit scope test
+  - No anti-pattern block (mega-prompt, aggregate diff, vibe coding)
+  - No model-to-task matching rule
+  - Tasks template lacked: implementation readiness fields, test-first prerequisites table, prompt template, explicit non-goals, context scope column
+- **Files created:**
+  - `.agent/rules/int-sdd-development.md` — 16-section authoritative development discipline rule: core contract (one-task/one-prompt/one-diff/one-commit), compliant/non-compliant prompt patterns, task readiness checklist (12 items, 3 categories of blocking conditions), small verifiable increments with prohibited compression patterns, changeset discipline (explicit scope test), review-before-commit with 12-item checklist, significantly-wrong generation stop rule with 7-source failure taxonomy (A–G) and upstream correction path, context discipline, prompt-by-identity integration, test-first compatibility, commit governance (AI attribution prohibition), model-to-task matching, task status integration, human accountability, anti-pattern table (11 entries), cross-line integration map.
+  - `.agent/workflows/task-by-task-development.md` — 12-step operationalized task execution loop: 3-part preconditions (full SDD chain, test-first prerequisites, status board); main loop: select→verify readiness→load context→update status→prompt by identity→generate→inspect diff→review→classify outcome (4 classifications with escalation)→commit→update status→next task; failed change handling; anti-pattern reference table; all 13 Blueprint scenarios validated against specific steps.
+  - `.agent/workflows/development-discipline-check.md` — 6-part validation workflow: Part 1 task readiness (4 subsections, 20+ checks), Part 2 changeset scope (explicit changeset test, file-by-file triage), Part 3 review completeness (7 subsections), Part 4 commit compliance (message format, AI attribution detection, scope, status), Part 5 status accuracy, Part 6 significantly-wrong generation classification (7-source diagnostic + escalation table, excessive re-prompting detection). Structured finding format with 11 area codes.
+- **Files updated:**
+  - `.agent/workflows/code-review.md` — Replaced 27-line thin workflow with comprehensive task-scoped review workflow: task-scoped review question, 12-item review procedure, AC/API/test/security/architecture/deferred-scope/changeset/unexpected-files/behaviour/unrelated checks, outcome classification (4 states), structured review record, completion signal. Explicit Gate 2 distinction.
+  - `.ai-context/tasks/_template.tasks.md` — Added: explicit state transition definitions (generated≠reviewed≠merged), Execution Rules section, Context Required column, Test-First Prerequisites table with RED confirmation tracking, Implementation Prompt Template using stable IDs, reinforced Boundary section.
+  - `.agent/workflows/pre-implementation-compliance.md` — Added Line 10 governance cross-references (development rule, execution workflow, discipline check).
+  - `.agent/rules/int-sdd-non-negotiables.md` — Strengthened Scope/Ambiguity/Consistency Gates section with one-task-one-prompt, generate→review→commit, and failure source classification cross-references.
+  - `.ai-context/constitution.md` — Added Line 10 governance items 13–16 (development rule, execution workflow, discipline check, code review).
+  - `README.md` — Added Development Discipline (Line 10) section with cycle diagram and significantly-wrong stop rule.
+  - `.ai-context/status.md` — Line 10 activity recorded.
+- **Lines 1–9 cross-line compatibility:** All verified. No conflicts introduced. Line 10 is additive:
+  - Line 4 test-first preserved: RED must precede generate step
+  - Line 5 lifecycle preserved: task states used verbatim (Not Started → In Progress → In Review → Merged)
+  - Line 8 branch/commit standards preserved: commit traceability pattern uses task ID; AI attribution prohibition reinforced
+  - Line 9 naming/ID standards integrated: prompt-by-identity (`<slug>.TNN`, `<slug>.ACN`) used throughout
+  - Gate 2 preserved: task-level review (pre-commit) is explicitly distinguished from Gate 2 (pre-merge)
+- **Validation:** All 20 quality-bar questions from task specification validated against repository evidence. All 13 Blueprint failure scenarios (A–M) validated against specific workflow steps.
+- **Unresolved issues:** Business requirements, project stack, architecture, reviewer assignments remain TBD. No tasks exist to execute against — correct for bootstrap state.
+- **Decisions/deviations:** No application functionality implemented. No example feature created. No fake tasks for demonstration. Repository remains a reusable SDD governance foundation.
+
 ## 2026-09-29 — INT SDD Line 9 Naming and Identifier Governance
 
 - **Artefact/task ID:** SDD Bootstrap — Line 9 Naming and Identifier Governance
