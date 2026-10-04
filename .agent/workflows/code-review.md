@@ -92,11 +92,35 @@ Test evidence record:
 
 ### 5. Security and Constitution
 
-- [ ] **[BLOCKING]** No security constraint from the spec or constitution is violated.
-- [ ] **[BLOCKING]** No secret, credential, API key, PII, or sensitive data is present
-      in any changed file, test fixture, configuration, or comment.
-- [ ] Security-relevant spec behaviour is implemented or explicitly noted as
-      outside this task's scope with a reference to the task that covers it.
+Governing rule: `.agent/rules/int-sdd-security.md`
+Full security validation: `.agent/workflows/security-check.md`
+
+**Run `.agent/workflows/security-check.md` Part 1 before every commit.**
+**Run `.agent/workflows/security-check.md` Part 8 as part of Gate 2 preparation.**
+
+- [ ] **[BLOCKING]** No secret, credential, API key, PII, or sensitive data is
+      present in any changed file, test fixture, configuration, log, or comment.
+      See `security-check.md` Part 1 for the full secrets/PII check.
+- [ ] **[BLOCKING]** No security constraint from the spec, constitution, or relevant
+      ADR is violated by this changeset.
+- [ ] **[BLOCKING]** Generated code is checked against the constitution and
+      approved architecture — not only against the spec. Security constraints
+      may originate from constitution and architecture, not feature ACs alone.
+- [ ] **[BLOCKING if applicable]** Security-relevant AC behaviour (injection,
+      authentication, authorization, data protection) is implemented or explicitly
+      noted as out of scope for this task with a reference to the task that covers it.
+- [ ] **[BLOCKING if applicable]** No dependency was introduced without vetting.
+      See `security-check.md` Part 2.
+- [ ] **[BLOCKING]** Security verification is not waived because the code was
+      AI-generated. Authorship does not change the security standard.
+- [ ] **[WARNING]** If this task has injection-relevant interfaces, confirm that
+      input validation is present (see `security-check.md` Part 4).
+- [ ] **[WARNING]** If this task introduces or modifies authentication or
+      authorization, confirm boundaries are enforced (see `security-check.md` Part 5).
+- [ ] **[WARNING]** If this task introduces permissions, confirm least privilege
+      (see `security-check.md` Part 6).
+- [ ] **[WARNING]** If this task stores or transmits sensitive data, confirm
+      data-protection controls (see `security-check.md` Part 7).
 
 ### 6. Architecture and Dependency Compliance
 

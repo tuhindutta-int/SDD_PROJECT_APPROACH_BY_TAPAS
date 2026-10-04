@@ -187,3 +187,61 @@ Regenerate from corrected source
 
 Do not patch code to compensate for an ambiguous specification.
 
+## QA & Security Governance (Line 11)
+
+### QA Governance
+
+**Tests derive from acceptance criteria — not from reading finished code.**
+
+| Artefact | Purpose |
+| -------- | ------- |
+| `.agent/rules/int-sdd-qa.md` | Authoritative QA rule: AC→test derivation, TC/UT namespaces, AI-generated test governance, UAT traceability, QA judgement boundary, integration/regression, failure escalation |
+| `.agent/workflows/qa-validation-check.md` | 7-part QA validation: derivation source, coverage, test-first evidence, AI-test review, UAT traceability, integration coverage, Gate 2 QA evidence |
+| `.agent/workflows/generate-tests.md` | Test creation workflow: source from spec, assign stable IDs, QA review |
+| `.ai-context/test_cases/_template.test_cases.md` | Per-feature test-case template (AC coverage matrix, TC/UT IDs, broader QA scenarios, UAT traceability, AI-test review record) |
+| `.ai-context/test_cases/_integration.md` | Cross-feature journeys, system-level scenarios, regression suites |
+
+**AC → Test traceability model:**
+
+```
+<slug>.AC1
+    ↓
+<slug>.TC01  (QA test case — test_cases/<slug>.test_cases.md)
+<slug>.UT01  (executable unit test — defined in spec)
+```
+
+- `TC` = QA test-case identity (broader validation scenarios including negative, boundary, manual)
+- `UT` = Spec-level unit-test identity (executable test functions, defined in the spec)
+
+Both are stable. Neither is renumbered. Retired IDs are never reassigned.
+
+**AI-generated tests:** Starting point only. Not QA approval. QA must review for
+AC mapping accuracy, meaningful assertions, and negative-path coverage.
+`GREEN` proves the implementation satisfies the executed test — not that the test
+suite fully captures the intended requirement.
+
+**UAT:** Must trace to AC IDs. A UAT failure with no matching AC is a specification
+gap — investigate and update the spec through Gate 1, not just patch code.
+
+### Security Governance
+
+**The code's origin does not change the security standard.**
+
+| Artefact | Purpose |
+| -------- | ------- |
+| `.agent/rules/int-sdd-security.md` | Authoritative security rule: authorship independence, secrets/PII, dependency vetting, SAST/DAST/scanning, injection, auth/authz, least privilege, data protection, exceptions, Gate 2 checklist |
+| `.agent/workflows/security-check.md` | 8-part security validation: secrets/PII, dependency vetting, scanning, injection, auth/authz, least privilege, data protection, Gate 2 evidence |
+
+**Core principles:**
+
+- Secrets, PII, credentials, and production data must never appear in any governance artefact, test fixture, commit, or log.
+- AI-suggested dependencies must be vetted before acceptance — not automatically installed.
+- SAST, DAST, and dependency scanning are **mandatory** regardless of code authorship. When the project pipeline exists, these controls are enforced. Until then they are **DEFERRED** — not waived.
+- Injection (SQL, XSS, command, template, path traversal, prompt injection) is a Gate 2 security concern checked per applicable interface.
+- Authentication establishes identity. Authorization determines permission. Both are verified independently at Gate 2.
+- Least privilege applies to all permission subjects: app identities, service accounts, database users, API credentials.
+- Data-at-rest and data-in-transit protection are verified against the approved architecture.
+- Security exceptions must be formally documented with owner, risk, and human sign-off. An agent cannot self-authorize an exception.
+
+**Gate 2 security checklist (16 controls):** See `.agent/rules/int-sdd-security.md` §10.1 and `.agent/workflows/security-check.md` Part 8. Security is a required Gate 2 verification dimension — not a competing gate.
+

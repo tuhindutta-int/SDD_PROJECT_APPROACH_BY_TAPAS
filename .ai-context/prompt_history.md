@@ -2,6 +2,68 @@
 
 This is an append-only audit log of user prompts and material execution events.
 
+## 2026-10-04 — INT SDD Line 11 QA & Security Governance
+
+- **Artefact/task ID:** SDD Bootstrap — Line 11 QA & Security Governance
+- **Objective:** Establish INT SDD Line 11 as an authoritative, enforceable QA and security governance layer. Core principles: tests derive from ACs not finished code; AI-generated tests are a starting point not QA approval; security applies regardless of code authorship; SAST/DAST/dependency scanning are mandatory (tooling deferred until pipeline established); security exceptions require documented human sign-off. No application functionality implemented.
+- **Phase 1 — Inspect:** Full audit of all `.agent/rules/`, `.agent/workflows/`, all templates, `constitution.md`, `lifecycle.md`, `status.md`, and `prompt_history.md`. Lines 1–10 confirmed present.
+- **Phase 2 — Line 11-relevant coverage in Lines 1–10:** Identified what existed and what was missing:
+  - `non-negotiables.md` §3: test-first with confirmed RED, AC source — **present**
+  - `non-negotiables.md` §4: no secrets/PII in artefacts — **present but narrow** (artefacts only)
+  - `code-review.md` §5: "no secret/PII", "no security constraint violated" — **present but generic** (2 lines; no control list)
+  - `generate-tests.md`: AC→test derivation principle — **present but thin** (29 lines; no QA review, no derivation STOP rule)
+  - `_template.test_cases.md`: TC/UT distinction, AC mapping, RED/GREEN — **present as good foundation**
+  - `constitution.md` Testing Discipline: baseline sentence — **present**
+  - `constitution.md` Security Posture: "TBD" — **placeholder only; no substantive governance**
+  - `lifecycle.md` Gate 2: "Inspect diff, ACs, security" — **present but not detailed**
+- **Phase 3 — Gaps identified:**
+  - No `int-sdd-qa.md` rule file (QA had no canonical authority document)
+  - No `int-sdd-security.md` rule file (security had no canonical authority document)
+  - No `qa-validation-check.md` workflow (no operational QA validation instrument)
+  - No `security-check.md` workflow (no operational security validation instrument)
+  - No SAST/DAST/dependency scan governance anywhere
+  - No injection governance (SQL, XSS, command, template, path traversal, LDAP, prompt injection)
+  - No authentication/authorization boundary governance (distinction not formalized)
+  - No least-privilege governance
+  - No data-protection governance (at-rest, in-transit, logs, caches, exports)
+  - No security-exception documentation requirement
+  - No Gate 2 security checklist
+  - No UAT traceability governance (spec-gap protocol missing)
+  - No AI-generated test review governance (review expectations not formalized)
+  - No integration/regression test file (`_integration.md` absent)
+  - No definition of the QA source-of-truth chain as an enforced sequence
+  - `generate-tests.md` had no STOP rule for reversed derivation, no QA review step
+  - `_template.test_cases.md` had no security notes, QA notes, broader QA scenarios, UAT traceability, or AI-test review record
+  - `code-review.md` §5 had only 2 generic security lines; no control list, no authorship-independence statement
+  - `constitution.md` Security Posture: "TBD" — replaced with substantive governance
+- **Files created:**
+  - `.agent/rules/int-sdd-qa.md` — 13-section authoritative QA rule: QA source-of-truth chain (spec→AC→test→RED→impl→GREEN→QA→UAT); blocking rule that tests must derive from spec not code; AC→test traceability model with TC/UT namespace distinction and traceability answers (one-to-many, many-to-one, orphan, stale, AC-change propagation); test-case ownership (per-feature and integration); AI-generated test governance (starting point, review expectations, prohibited conclusions); QA judgement boundary (8 human-required areas with risk-based applicability); UAT traceability with specification-gap protocol; test-coverage gap detection table (10 gap types with severities); test-first preservation (GREEN ≠ sufficient test suite); integration/regression governance; QA failure escalation taxonomy (A, B, C, D, E, F, H); human accountability; cross-line integration map.
+  - `.agent/rules/int-sdd-security.md` — 13-section authoritative security rule: security independence of code authorship (3 prohibited statements); secrets/PII governance (prohibited locations table, handling requirements, synthetic data); dependency vetting process (proposed→vet→human acceptance→manifest); SAST/DAST/dependency scanning (mandatory; tooling deferred until pipeline; deferred≠waived); injection governance (7 classes including prompt injection; applicability-based); authentication/authorization boundary distinction (established/trusted/enforced separately); least privilege (permission subjects table); data protection (at-rest, in-transit, logs, caches, exports); security exceptions (documented, owner, remediation, human sign-off; agent cannot self-authorize); Gate 2 security checklist (16 controls with Applicable/N/A/Passed/Failed/Exception states); external/untrusted content governance (separation of data and instructions); security failure escalation taxonomy (B, C, D, E, F, G); cross-line integration map.
+  - `.agent/workflows/qa-validation-check.md` — 7-part QA validation workflow: Part 1 test derivation (source chain + derivation verification); Part 2 test-case coverage (AC matrix, identity validation, test quality, orphan/stale detection); Part 3 test-first RED evidence (with evidence format requirements); Part 4 AI-generated test review (quality, completeness, prohibited conclusions); Part 5 UAT traceability (scenario trace, failure classification with spec-gap protocol); Part 6 integration/regression coverage; Part 7 Gate 2 QA evidence (with structured record format). 10 area codes, scenario quick-reference.
+  - `.agent/workflows/security-check.md` — 8-part security validation workflow: Part 1 secrets/PII (artefacts, prompts, test fixtures, logs); Part 2 dependency vetting (legitimacy, purpose, CVEs, maintenance, transitive, licensing, human acceptance + record format); Part 3 scanning controls (SAST/DAST/dependency scan with explicit deferred-not-waived distinction); Part 4 injection (applicability matrix per class including prompt injection); Part 5 auth/authz (distinct checks — auth cannot proxy authz); Part 6 least privilege (per-identity review table); Part 7 data protection (at-rest, in-transit, logs, caches, exports); Part 8 Gate 2 security evidence (16-control checklist aggregation + structured record). Security exception record format, 12 area codes, scenario quick-reference for all Blueprint scenarios E–Q.
+  - `.ai-context/test_cases/_integration.md` — Integration and system-level test cases file: INT-NN identity format, scenario structure with feature slug and AC traceability, purpose/scope definition, regression baseline placeholder. Initialized empty — no fake scenarios created.
+- **Files updated:**
+  - `.agent/workflows/generate-tests.md` — Replaced 29-line thin workflow with 8-step Line 11-compliant workflow: Step 1 source the spec not the code (with STOP rule for reversed derivation), Step 2 map each AC to test coverage (positive/negative/boundary/error), Step 3 assign stable identities (TC/UT), Step 4 record in template, Step 5 distinguish AC-derived from broader QA, Step 6 security-relevant ACs, Step 7 QA review of AI-generated tests, Step 8 never alter ACs to pass. Full completion checklist with security-check.md Part 1 integration.
+  - `.ai-context/test_cases/_template.test_cases.md` — Updated with: governing rule references, IMPORTANT derivation warning, expanded AC coverage matrix with test IDs, TC/UT namespace reference table, additional per-test-case fields (Negative/boundary notes, Security notes, QA notes), expanded Failure Path Coverage table with security-relevant row, Broader QA Scenarios section, UAT Traceability table with specification-gap classification, AI-Generated Test Review Record section.
+  - `.agent/workflows/code-review.md` §5 — Replaced 3-line generic security check with comprehensive 14-item section: secrets/PII BLOCKING, constitution+architecture check (not spec-only), authorship-independence statement, security-relevant AC coverage, dependency vetting, injection/auth/authz/least-privilege/data-protection WARNINGs. References security-check.md Parts 1, 2, 4, 5, 6, 7, 8.
+  - `.ai-context/constitution.md` — Testing Discipline INT SDD baseline strengthened from one sentence to full QA governance reference (mandatory sequence, TC/UT distinction, AI-test governance, UAT gap protocol, governing rule cross-references); Security Posture INT SDD baseline replaced from "TBD" placeholder with full 9-point security principles and governing rule references; Non-Negotiable Implementation Gates section: Line 11 governance items 17–22 added.
+  - `README.md` — Added QA & Security Governance (Line 11) section with QA source-of-truth chain, AC→test traceability model, TC/UT namespace explanation, AI-test governance, UAT spec-gap principle, security artefact table, core security principles, and Gate 2 security checklist reference.
+  - `.ai-context/status.md` — Line 11 activity recorded.
+- **Lines 1–10 cross-line compatibility:** All verified. No conflicts introduced. Line 11 is purely additive:
+  - Line 1 spec primary artefact: preserved — tests derive from spec, not code
+  - Line 3 artefact chain: preserved — test_cases file added to chain
+  - Line 4 test-first, no secrets: preserved — RED before implementation; secrets/PII prohibition strengthened
+  - Line 5 lifecycle states: preserved — QA and security states reference existing lifecycle transitions
+  - Line 6 spec standard: preserved — ACs remain in spec; tests derive from ACs
+  - Line 7 Gate 1: preserved — AC testability remains a Gate 1 responsibility
+  - Line 8 architecture: preserved — architectural security constraints feed Gate 2
+  - Line 9 naming/IDs: preserved — TC/UT namespaces documented as distinct; no new IDs collide
+  - Line 10 task discipline: preserved — security-check.md Part 1 runs before commit; Gate 2 security extends code-review.md
+  - Gate 2: preserved — security and QA are required dimensions of Gate 2, not competing gates
+- **Validation:** All 27 quality-bar questions validated. All 17 Blueprint failure scenarios (A–Q) validated against specific workflow steps.
+- **Deferred items:** Specific scanner tools (SonarQube, Semgrep, Snyk, OWASP ZAP, Trivy, etc.) — not mandated; bind when project stack is known. Cloud IAM role names — not encoded; stack-neutral principles only. Project-specific device/browser matrix — TBD. Project-specific accessibility requirements — TBD. CI/CD pipeline integration — DEFERRED until project pipeline established; controls not waived.
+- **Decisions/deviations:** No application functionality implemented. No fake feature, fake tests, or fake security findings created. No scanners installed or configured. No CI/CD pipeline created. Repository remains a reusable, technology-neutral SDD governance foundation.
+
 ## 2026-09-30 — INT SDD Line 10 Development Discipline
 
 - **Artefact/task ID:** SDD Bootstrap — Line 10 Development Discipline
